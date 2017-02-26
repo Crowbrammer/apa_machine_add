@@ -12,6 +12,10 @@
 
 	id: teammate_modify_screen
 	name: 'TeammateModifyScreen'
+	Label:
+		id: teammate_name
+		text: app.teammate_name
+
 	PrimaryOverlay
 
 <PrimaryOverlay>:
@@ -30,7 +34,7 @@
 
 	Label:
 		id: my_teammates
-		text: 'Your teammates:'
+		text: app.teammate_name
 		font_size: '30dp'
 
 	Button:
@@ -41,13 +45,15 @@
 <TeammateModifyLayout>:
 
 	id: teammate_modify_layout
+	teammate_name: 'teammate_name'
+
 
 	orientation: 'vertical'
 	padding: 20
 
 	Label:
 		id: teammate_name
-		text: 'teammate_name Label'
+		text: 'teammate_name'
 
 	Button:
 
@@ -82,7 +88,11 @@
 
 <SwitchScreensButton>:
 
-	on_release: app.root.current = 'TeammateModifyScreen'
+	text: 'Hello'
+
+	on_release:
+		app.root.current = 'TeammateModifyScreen'
+		app.teammate_name = self.text
 
 <NavigationHUD>
 
