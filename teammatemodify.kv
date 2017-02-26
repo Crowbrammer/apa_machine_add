@@ -1,0 +1,97 @@
+
+<ScreenManagement>:
+
+	ListTeammatesScreen:
+		id: list_teammates_screen
+	TeammateModifyScreen:
+		id: teammate_modify_screen
+
+# High Level
+
+<TeammateModifyScreen>:
+
+	id: teammate_modify_screen
+	name: 'TeammateModifyScreen'
+	PrimaryOverlay
+
+<PrimaryOverlay>:
+
+	TeammateModifyLayout
+
+<ListTeammatesScreen>:
+
+	name: 'ListTeammatesScreen'
+	ListTeammatesLayout
+
+<ListTeammatesLayout>:
+
+	orientation: 'vertical'
+	padding: 20, 20
+
+	Label:
+		id: my_teammates
+		text: 'Your teammates:'
+		font_size: '30dp'
+
+	Button:
+		text: 'ListTeammatesScreen'
+		on_release: root.manager.current = 'ListTeammatesScreen'
+# Low Level
+
+<TeammateModifyLayout>:
+
+	id: teammate_modify_layout
+
+	orientation: 'vertical'
+	padding: 20
+
+	Label:
+		id: teammate_name
+		text: 'teammate_name Label'
+
+	Button:
+
+		on_release: app.root.current = 'PositionerScreen'
+		text: 'Position Em!'
+		font_size: '30dp'
+
+
+	# Submit
+	Button:
+
+		on_release: root.record_that_shit()
+		text: 'Record That Shit!'
+		font_size: '30dp'
+
+	Image:
+
+		source: 'data/cat.jpg'
+
+	NavigationHUD
+
+<IsSheTrained>:
+
+	Label:
+
+		id: position_label
+		text: '[Position Name]'
+
+	Switch:
+
+		id: position_training_switch
+
+<SwitchScreensButton>:
+
+	on_release: app.root.current = 'TeammateModifyScreen'
+
+<NavigationHUD>
+
+	size_hint_y: None
+	height: '40dp'
+	Button:
+		id: feedback_button
+		text: 'Spch Bubble'
+
+	Button:
+		id: home_button
+		text: 'Home'
