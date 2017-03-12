@@ -10,17 +10,38 @@
 
 <TeammateModifyScreen>:
 
-	id: teammate_modify_screen
 	name: 'TeammateModifyScreen'
-	Label:
-		id: teammate_name
-		text: app.teammate_name
+	navigation_HUD: navigation_HUD
+	teammate_name: teammate_name
 
-	PrimaryOverlay
+	BoxLayout:
+
+		orientation: 'vertical'
+		padding: 20, 20
+
+		Label:
+			id: teammate_name
+			size_hint_y: None
+			height: '40dp'
+			font_size: '30dp'
+			text: app.teammate_name
+
+		# Make the height of the ScrollView the remaining space after the label and
+		# the NavigationHUD.
+
+
+		PrimaryOverlay:
+			id: primary_overlay
+			#size_hint_y: None
+			#height: self.height - root.navigation_HUD.height - root.teammate_name.height
+
+		NavigationHUD:
+			id: navigation_HUD
 
 <PrimaryOverlay>:
 
-	TeammateModifyLayout
+	TeammateModifyLayout:
+		id: teammate_modify_layout
 
 <ListTeammatesScreen>:
 
@@ -43,6 +64,12 @@
 # Low Level
 
 <TeammateModifyLayout>:
+
+	#Make sure it doesn't resize the elements
+	#size_hint_y: None
+
+	#Set the spacing of TeammateModifyLayout to 10.
+	spacing: 10
 
 	id: teammate_modify_layout
 	teammate_name: 'teammate_name'
@@ -88,10 +115,15 @@
 
 <SwitchScreensButton>:
 
+	# Set the size_hint_y of each lsm to None
+
+	# Set the height of each lsm to '20dp'
+	height: '20dp'
 	text: 'Hello'
 
 	on_release:
 		app.root.current = 'TeammateModifyScreen'
+		app.root.ids.teammate_modify_screen.ids.primary_overlay.ids.teammate_modify_layout
 		app.teammate_name = self.text
 
 <NavigationHUD>

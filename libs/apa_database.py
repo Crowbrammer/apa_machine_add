@@ -107,8 +107,13 @@ def get_data(table_name=None, specific_data=False, column_name=None, model=None,
 
 	elif model is not None:
 
-		c.execute('SELECT * FROM {tn} WHERE {cn}="{mo}" ORDER BY {ob} '.\
-			format(tn=table_name, cn=column_name, mo=model, ob=order_by_column))
+		c.execute('SELECT * FROM {tn} WHERE {cn}=? ORDER BY {ob} '.\
+			format(tn=table_name, cn=column_name, ob=order_by_column), specific_data)
+
+	elif order_by_column == 'None':
+
+		c.execute('SELECT * FROM {tn} WHERE {cn}=?'.\
+			format(tn=table_name, cn=column_name), specific_data)
 
 	elif order_by_column is not None:
 
@@ -373,6 +378,27 @@ def assign_people_to_positions():
 
 	# How I learned to return from functions properly: http://bit.ly/1yn6OfQ
 
+# Generalized entry--failed.
+# def delete_entry_with_3_wheres(self, tb=None, where_col1=None, data1=None, \
+# 	where_col2=None, data2=None, where_col3=None, data3=None):
+
+# Delete training entry
+def delete_training_entry(self, teammate=None, modelID=None, positionNum=None):
+
+	'''
+
+	Currently deletes entries with 3 wheres
+
+	'''
+	print('teammate_name:', teammate)
+	print('current_position[0]:', modelID)
+	print('current_position[1]:', positionNum)
+	open_connection()
+
+	c.execute('DELETE FROM teammate_modelID_positionnum WHERE teammate=? AND modelID=? AND positionNum=?', (teammate, modelID, positionNum))
+
+	conn.commit()
+	close_connection()
 
 
 create_table('machineID_modelID_status', 'modelID_positionnum', 'teammate_modelID_positionnum')
